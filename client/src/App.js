@@ -1,13 +1,42 @@
 /** @format */
 
-import logo from "./logo.svg";
-import "./App.css";
+// @ts-nocheck
+/** @format */
 
+import React from "react";
+import { Container, AppBar, Typography, Grow, Grid } from "@material-ui/core";
+import Form from "./components/Form/Form";
+import Posts from "./components/posts/Posts";
+import memories from "./images/memories.png";
+import useStyles from "./styles";
 function App() {
+  const classes = useStyles();
   return (
-    <div className="App">
-      <h1>Hello</h1>
-    </div>
+    <Container maxidth="lg">
+      <AppBar className={classes.appBar} position="static" color="inherit">
+        <Typography className={classes.heading} varient="h2" align="center">
+          Memories
+        </Typography>
+        <img className={classes.image} src={memories} height="60" width="200" />
+      </AppBar>
+      <Grow in>
+        <Container>
+          <Grid
+            container
+            justify="space-between"
+            alignItems="stretch"
+            spacing={3}
+          >
+            <Grid item xs={12} sm={7}>
+              <Posts />
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <Form />
+            </Grid>
+          </Grid>
+        </Container>
+      </Grow>
+    </Container>
   );
 }
 
