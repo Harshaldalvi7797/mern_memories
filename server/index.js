@@ -15,22 +15,20 @@ app.use(cors());
 
 app.use("/posts", postRoutes);
 
-const connection_url =
-  "mongodb+srv://harshal:harshal7797@test-cluster.1swf7.mongodb.net/demo?retryWrites=true&w=majority";
+// const CONNECTION_URL =
+//   "mongodb+srv://harshal:harshal7797@test-cluster.1swf7.mongodb.net/demo?retryWrites=true&w=majority";
 const PORT = process.env.PORT || 5000;
 
-//connection
 mongoose
-  .connect(connection_url, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
-  .then(() => {
-    app.listen(PORT, () => {
-      console.log(`port running on port : ${PORT}`);
-    });
-  })
-  .catch(error => {
-    console.log(`${error} did not connect`);
-  });
+  .connect(
+    "mongodb+srv://harshal:harshal7797@test-cluster.1swf7.mongodb.net/demo?retryWrites=true&w=majority",
+    { useNewUrlParser: true, useUnifiedTopology: true }
+  )
+  .then(() =>
+    app.listen(PORT, () =>
+      console.log(`Server Running on Port: http://localhost:${PORT}`)
+    )
+  )
+  .catch(error => console.log(`${error} did not connect`));
+
 mongoose.set("useFindAndModify", false);

@@ -3,14 +3,22 @@
 // @ts-nocheck
 /** @format */
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container, AppBar, Typography, Grow, Grid } from "@material-ui/core";
+import { useDispatch } from "react-redux";
+import { getPosts } from "./actions/posts";
 import Form from "./components/Form/Form";
 import Posts from "./components/posts/Posts";
 import memories from "./images/memories.png";
 import useStyles from "./styles";
 function App() {
+  const [currentId, setCurrentId] = useState(0);
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getPosts());
+  }, [currentId, dispatch]);
   return (
     <Container maxidth="lg">
       <AppBar className={classes.appBar} position="static" color="inherit">

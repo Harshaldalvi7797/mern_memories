@@ -6,8 +6,9 @@ const postMessage = require("../models/postMessage");
 
 const getPost = async (req, res) => {
   try {
-    res.send("okkkk");
+    // res.send("okkkk");
     const postMessages = await postMessage.find();
+    console.log(postMessages);
     res.status(200).json(postMessages);
     console.log(postMessages);
   } catch (error) {
@@ -20,6 +21,7 @@ const createPost = async (req, res) => {
   try {
     await newPost.save();
     res.status(201).json(newPost);
+    console.log(newPost);
   } catch (error) {
     res.status(409).json({ message: { error } });
   }
