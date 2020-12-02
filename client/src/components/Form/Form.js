@@ -27,13 +27,24 @@ export default function Form({ currentId, setCurrentId }) {
     e.preventDefault();
     if (currentId) {
       dispatch(updatePost(currentId, postData));
-      console.log(dispatch(updatePost(currentId, postData)))
+      console.log(dispatch(updatePost(currentId, postData)));
+      clear();
     } else {
       dispatch(createPost(postData));
+      clear();
     }
     console.log(postData);
   };
-  const clear = () => {};
+  const clear = () => {
+    setCurrentId(null);
+    setpostData({
+      creator: "",
+      title: "",
+      message: "",
+      tags: "",
+      selectedFile: ""
+    });
+  };
 
   return (
     <React.Fragment>
@@ -44,7 +55,9 @@ export default function Form({ currentId, setCurrentId }) {
           className={`${classes.root} ${classes.form}`}
           onSubmit={handleSubmit}
         >
-          <Typography variant="h6">Creating a Memory</Typography>
+          <Typography variant="h6">
+            {currentId ? "Editing" : "Creating"} a Memory
+          </Typography>
           <TextField
             name="creator"
             variant="outlined"
@@ -102,7 +115,13 @@ export default function Form({ currentId, setCurrentId }) {
           >
             Submit
           </Button>
-          <Button variant="contained" color="secondary" size="small" fullWidth>
+          <Button
+            variant="contained"
+            onClick={clear}
+            color="secondary"
+            size="small"
+            fullWidth
+          >
             Clear
           </Button>
         </form>
