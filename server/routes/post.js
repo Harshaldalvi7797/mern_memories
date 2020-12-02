@@ -8,6 +8,7 @@ router.get("/", cr.getPost);
 router.post("/", cr.createPost);
 router.patch("/:id", cr.updatePost);
 router.delete("/:id", cr.deletePost);
+router.patch("/:id/likePost", cr.likePost);
 
 // router.get("/", async (req, res) => {
 //   const postMessages = await postMessage.find();
