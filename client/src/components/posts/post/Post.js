@@ -17,8 +17,9 @@ import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 
 import { useDispatch } from "react-redux";
 
-const Post = ({ post }) => {
+const Post = ({ post, setCurrentId }) => {
   const classes = useStyles();
+  console.log(post);
   return (
     <Card className={classes.card}>
       <CardMedia
@@ -33,15 +34,18 @@ const Post = ({ post }) => {
         </Typography>
       </div>
       <div className={classes.overlay2}>
-        <Typography variant="h6">{post.creator}</Typography>
-        <Typography variant="body2">
-          {moment(post.createdAt).fromNow()}
-        </Typography>
+        <Button
+          style={{ color: "white" }}
+          size="small"
+          onClick={() => setCurrentId(post._id)}
+        >
+          <MoreHorizIcon fontSize="default" />
+        </Button>
       </div>
       <div className={classes.details}></div>
       <div className={classes.details}>
         <Typography variant="body2" color="textSecondary" component="h2">
-          {/* {post.tags.map(tag => `#${tag} `)} */}
+          {post.tags.map(tag => `#${tag} `)}
         </Typography>
       </div>
       <Typography
