@@ -1,12 +1,12 @@
 /** @format */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TextField, Paper, Button, Typography } from "@material-ui/core";
 import useStyles from "./styles";
 import FileBase from "react-file-base64";
-import { useDispatch } from "react-redux";
-import { createPost } from "../../actions/posts";
-export default function Form() {
+import { useDispatch, useSelector } from "react-redux";
+import { createPost, updatePost } from "../../actions/posts";
+export default function Form({ currentId, setCurrentId }) {
   const [postData, setpostData] = useState({
     creator: "",
     title: "",
@@ -15,10 +15,22 @@ export default function Form() {
     selectedFile: ""
   });
   const classes = useStyles();
+  const post = useSelector(state =>
+    currentId ? state.posts.find(p => p._id === currentId) : null
+  );
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (post) setpostData(post);
+  }, [post]);
   const handleSubmit = async e => {
     e.preventDefault();
-    dispatch(createPost(postData));
+    if (currentId) {
+      dispatch(updatePost(currentId, postData));
+      console.log(dispatch(updatePost(currentId, postData)))
+    } else {
+      dispatch(createPost(postData));
+    }
     console.log(postData);
   };
   const clear = () => {};
@@ -32,7 +44,7 @@ export default function Form() {
           className={`${classes.root} ${classes.form}`}
           onSubmit={handleSubmit}
         >
-          <Typography variant="h6"></Typography>
+          <Typography variant="h6">Creating a Memory</Typography>
           <TextField
             name="creator"
             variant="outlined"

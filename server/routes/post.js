@@ -6,6 +6,7 @@ const postMessage = require("../models/postMessage");
 const cr = require("../controllers/post");
 router.get("/", cr.getPost);
 router.post("/", cr.createPost);
+router.patch("/:id", cr.updatePost);
 
 // router.get("/", async (req, res) => {
 //   const postMessages = await postMessage.find();
