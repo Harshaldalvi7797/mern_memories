@@ -28,12 +28,14 @@ const App = () => {
         <img className={classes.image} src={memories} height="60" width="200" />
       </AppBar>
       <Grow in>
-        <Container>
+        <Container className={classes.mainContainer}>
           <Grid
             container
             justify="space-between"
             alignItems="stretch"
             spacing={3}
+        
+            
           >
             <Grid item xs={12} sm={7}>
               <Posts setCurrentId={setCurrentId} />

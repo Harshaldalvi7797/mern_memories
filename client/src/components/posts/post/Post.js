@@ -59,7 +59,9 @@ const Post = ({ post, setCurrentId }) => {
         {post.title}
       </Typography>
       <CardContent>
-        <Typography variant="h5">{post.message}</Typography>
+        <Typography variant="body2" color="textSecondary">
+          {post.message}
+        </Typography>
       </CardContent>
       <CardActions className={classes.cardActions}>
         <Button size="small" color="primary">
